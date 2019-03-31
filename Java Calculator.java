@@ -7,6 +7,7 @@ import java.util.Scanner;
  */
 public class JavaCalculator {
     // Assume that the calculator will work only with base 10.
+    /*Does this work?*/
     public static final int RADIX = 10;
 
     public static void main(String[] args) {

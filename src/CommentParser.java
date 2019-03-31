@@ -6,7 +6,7 @@ import java.util.*;
  * Parses a Java source code file and displays comments to the console.
  * JavaDoc comment parsing is in progress.
  * @author Shaun Sandstrom
- * @version 1.0
+ * @version 1.1
  */
 
 public class CommentParser {
@@ -39,19 +39,27 @@ public class CommentParser {
                 if(currChar == '/') {
                     StringBuilder strBuilder = parseSingleLineComment(buffer);
                     String currComment = strBuilder.toString();
-                    // A new line character was reached.
+                    /* A new line character was reached since the single line
+                       comment was read.
+                     */
                     comments.put(lineNum++, currComment);
                 } else if(currChar == '*') {
                     int beginLineNum = lineNum;
                     StringBuilder strBuilder = new StringBuilder();
-                    /*
-                    if((currCharInt = buffer.read()) == '*') {
+                    currCharInt = buffer.read();
+                    if((currCharInt) == '*') {
                         parseJavaDocComment(buffer, strBuilder);
+                    } else {
+                        currChar = (char) currCharInt;
+                        if(currChar == '\n') {
+                            lineNum++;
+                        } else {
+                            strBuilder.append(currChar);
+                        }
+                        parseMultiLineComment(buffer, strBuilder);
+                        String currComment = strBuilder.toString();
+                        comments.put(beginLineNum, currComment);
                     }
-                    */
-                    parseMultiLineComment(buffer, strBuilder);
-                    String currComment = strBuilder.toString();
-                    comments.put(beginLineNum, currComment);
                 }
             }
             if (currChar == '\n') {
@@ -98,12 +106,11 @@ public class CommentParser {
         parseMultiLineComment(buffer, strBuilder);
     }
 
-    /*
     public static void parseJavaDocComment(Reader buffer, StringBuilder strBuilder)
                                             throws IOException {
         int currCharInt;
         char currChar;
-        while((currCharInt = buffer.read()) != '*') {
+        while ((currCharInt = buffer.read()) != '*') {
             if (currCharInt == '\n') {
                 lineNum++;
             }
@@ -120,5 +127,4 @@ public class CommentParser {
         strBuilder.append(currChar);
         parseJavaDocComment(buffer, strBuilder);
     }
-    */
 }
