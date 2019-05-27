@@ -4,10 +4,13 @@ import java.util.Scanner;
  * This is a calculator for simple base-10 arithmetic. It only runs once.
  * In other words, it only performs calculations on two numbers and then
  * terminates.
+ * 
+ * @author Sandstrom
+ * @version 1.0
  */
+
 public class JavaCalculator {
     // Assume that the calculator will work only with base 10.
-    /*Does this work?*/
     public static final int RADIX = 10;
 
     public static void main(String[] args) {
@@ -21,6 +24,8 @@ public class JavaCalculator {
         System.out.println("Welcome to Java calculator!");
         System.out.println("Enter a number: ");
         num1Str = console.nextLine().trim();
+	/* If a number is not a valid integer according to the radix, print a message
+           indicating that it is invalid. */
         while(!isInteger(num1Str, RADIX)) {
             System.out.println("Type in a number's digits, like this: \"135\". Please try again.");
             num1Str = console.nextLine().trim();
@@ -69,6 +74,7 @@ public class JavaCalculator {
 
     /**
      * Checks if a string is an integer.
+     * 
      * @param str a String which is the string to check
      * @param radix an int which is the base of the string
      * @return if the String is an integer
